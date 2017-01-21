@@ -12,10 +12,10 @@ class SVGData
 public:
 	/*
 	* Error Code
-	* 
+	*
 	* Description
 	*	This part define the error code will be used here, including initial error
-	* and other we could encounter. Use SVGData::CONTENT to confirm the status of 
+	* and other we could encounter. Use SVGData::CONTENT to confirm the status of
 	* the working spare data.
 	*
 	* Content Def.
@@ -45,10 +45,9 @@ public:
 	{
 		QBrush brush;
 		SVGFill(QBrush& q)
-			:brush(q){}
+			:brush(q) {}
 		SVGFill() {}
 	};
-
 
 	SVGData(const char* filename, QVector<SVGTriangle>& tr, QVector<SVGFill>& fill, double turb = 1.1);
 	void test();
@@ -73,7 +72,7 @@ private:
 	QMap<std::string, int> refs;
 	std::stringstream ss;
 
-	// 
+	//
 	unsigned int triscounter = 0;
 	unsigned int findcounter = 0;
 };

@@ -3,7 +3,7 @@
 SVGData::SVGData(const char * filename, QVector<SVGData::SVGTriangle>& tr, QVector<SVGFill>& fill, double t)
 	:tris(tr), fills(fill), maxX(0), maxY(0), minX(0), minY(0), turb(t)
 {
-	// read the content of the file 
+	// read the content of the file
 	QFile svgfile(filename);
 	if (!svgfile.open(QIODevice::ReadOnly))
 	{
@@ -23,12 +23,10 @@ SVGData::SVGData(const char * filename, QVector<SVGData::SVGTriangle>& tr, QVect
 	{
 		error = INIT_FAILURE;
 	}
-
 }
 
 void SVGData::test()
 {
-	
 }
 
 int SVGData::processData()
@@ -90,7 +88,7 @@ int SVGData::processData()
 int SVGData::getTriangle(QDomElement& e)
 {
 	SVGTriangle result;
-	
+
 	// get the fill pattern
 	QDomAttr qda = e.attributeNode("fill");
 	std::string fill = qda.value().toStdString();
@@ -105,7 +103,7 @@ int SVGData::getTriangle(QDomElement& e)
 			result.fillIndex = refs[data];
 		}
 	}
-	else if(fill[0] == '#')
+	else if (fill[0] == '#')
 	{
 		fills.push_back(QBrush(QColor(QString(fill.c_str()))));
 		findcounter++;

@@ -30,7 +30,6 @@ public:
 	*/
 	void riseUp(qreal dis);
 
-
 	/***************************** Override *****************************/
 	QRectF boundingRect() const;
 	void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = Q_NULLPTR);

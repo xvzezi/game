@@ -2,17 +2,15 @@
 
 WaterLevel::WaterLevel(const char * filename, int x, int y, int heightMax,
 	GameProtocol layer, QGraphicsItem* parent)
-	:svg(filename, tris, fills), QGraphicsItem(parent), 
-	bounding(svg.minX, svg.minY, svg.maxX - svg.minX, svg.maxY - svg.minY + 256)
+	:svg(filename, tris, fills), QGraphicsItem(parent),
+	bounding(2, 0, svg.maxX - svg.minX, svg.maxY - svg.minY + 256)
 {
 	// set the bounding box
 	bounding.setHeight(heightMax - y);
 	qDebug("Item size: %f", svg.maxX);
 	setPos(x, y);
 	setZValue(layer);
-	setFlag(QGraphicsItem::ItemIsFocusable);
-	setFocus();
-	riseUp(500);
+	riseUp(600);
 	startTimer(20);
 	//qsrand(time(NULL));
 }
@@ -39,7 +37,7 @@ void WaterLevel::objDrawer(QPainter * painter)
 		painter->setRenderHint(QPainter::Antialiasing, true);
 		painter->setPen(QPen(QColor(255, 255, 255, 0), 0));
 		painter->setOpacity(tris[i].opacity);
-		if (tris[i].fillIndex >= 0) 
+		if (tris[i].fillIndex >= 0)
 		{
 			painter->setBrush(fills[tris[i].fillIndex].brush);
 		}
@@ -104,9 +102,10 @@ void WaterLevel::shuffle2()
 
 void WaterLevel::paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget)
 {
+	painter->setRenderHint(QPainter::Antialiasing, true);
+	painter->setPen(QPen(QColor(255, 255, 255, 0), 0));
 	objDrawer(painter);
 	//// 反走样
-	//painter->setRenderHint(QPainter::Antialiasing, true);
 
 	//// 设置渐变色
 	//QLinearGradient linear(QPointF(80, 80), QPointF(150, 150));
@@ -117,7 +116,6 @@ void WaterLevel::paint(QPainter * painter, const QStyleOptionGraphicsItem * opti
 	//linear.setSpread(QGradient::PadSpread);
 
 	//// 设置画笔颜色、宽度
-	//painter->setPen(QPen(QColor(0, 160, 230), 2));
 
 	//// 设置画刷填充
 	//painter->setBrush(linear);
@@ -134,8 +132,4 @@ void WaterLevel::timerEvent(QTimerEvent * timer)
 
 void WaterLevel::keyReleaseEvent(QKeyEvent * event)
 {
-	qDebug("Key Release");
-	riseUp(-1);
 }
-
-
